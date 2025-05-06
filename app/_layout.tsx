@@ -1,7 +1,7 @@
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 
-const routes = ['index', '(root', '(auth)'] as const;
+const routes = ['index', '(root)', '(auth)'] as const;
 
 export default function RootLayout() {
   const [loaded] = useFonts({
