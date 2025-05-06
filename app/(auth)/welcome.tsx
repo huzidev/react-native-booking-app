@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Swiper from "react-native-swiper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { onBoardingData } from "@/constants";
+import { onboarding } from "@/constants";
 
 export default function onBoarding() {
   const swiperRef = useRef(null);
@@ -23,11 +23,9 @@ export default function onBoarding() {
         loop={false}
         onIndexChanged={(i) => setActiveIndex(i)}
       >
-        {onBoardingData.map((item) => (
+        {onboarding.map((item) => (
           <View>
-            <Text>
-              {item.title}
-            </Text>
+            <Text>{item.title}</Text>
           </View>
         ))}
       </Swiper>
