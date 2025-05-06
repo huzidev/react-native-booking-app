@@ -1,4 +1,4 @@
-export const onBoarding = [
+export const onBoardingData = [
   {
     id: 1,
     title: "The perfect ride is just one tap away",
