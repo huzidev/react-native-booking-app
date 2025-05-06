@@ -1,6 +1,8 @@
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 
+const routes = ['index', '(root', '(auth)'] as const;
+
 export default function RootLayout() {
   const [loaded] = useFonts({
     "Jakarta-Bold": require("../assets/fonts/PlusJakartaSans-Bold.ttf"),
@@ -19,8 +21,9 @@ export default function RootLayout() {
 
   return (
       <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        {routes.map((route) => (
+          <Stack.Screen key={route} name={route} options={{ headerShown: false }} />
+        ))}
         <Stack.Screen name="+not-found" />
       </Stack>
   );
