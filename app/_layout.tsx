@@ -1,6 +1,7 @@
 import { useFonts } from 'expo-font';
 import "./global.css";
 import { Stack } from 'expo-router';
+import { ClerkProvider } from "@clerk/clerk-expo";
 
 const routes = ['index', '(root)', '(auth)'] as const;
 
@@ -21,15 +22,17 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack>
-      {routes.map((route, index) => (
-        <Stack.Screen
-          key={index}
-          name={route}
-          options={{ headerShown: false }}
-        />
-      ))}
-      <Stack.Screen name="+not-found" />
-    </Stack>
+    <ClerkProvider>
+      <Stack>
+        {routes.map((route, index) => (
+          <Stack.Screen
+            key={index}
+            name={route}
+            options={{ headerShown: false }}
+          />
+        ))}
+        <Stack.Screen name="+not-found" />
+      </Stack>
+    </ClerkProvider>
   );
 }
