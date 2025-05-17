@@ -7,6 +7,7 @@ import {
   Image,
   Platform,
   TextInput,
+  Keyboard,
 } from "react-native";
 
 export default function InputField({
@@ -25,7 +26,7 @@ export default function InputField({
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
-      <TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View className="my-2 w-full">
           <Text className={`text-lg font-JakartaSemiBold mb-3 ${labelStyle}`}>
             {label}
