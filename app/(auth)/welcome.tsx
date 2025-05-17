@@ -4,6 +4,7 @@ import { Text, TouchableOpacity, View, Image } from "react-native";
 import Swiper from "react-native-swiper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { onboarding } from "@/constants";
+import CustomButton from "@/components/CustomButton";
 
 export default function onBoarding() {
   const swiperRef = useRef(null);
@@ -47,6 +48,10 @@ export default function onBoarding() {
           </View>
         ))}
       </Swiper>
+      <CustomButton 
+        title="Next"
+        className="w-11/12 mt-10"
+      />
     </SafeAreaView>
   );
 }
