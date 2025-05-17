@@ -37,7 +37,7 @@ export default function onBoarding() {
               resizeMode="contain"
             />
             <View className="flex flex-row items-center justify-center w-full mt-10">
-              <Text className="text-black text-3xl mx-10 text-center font-bold">
+              <Text className="text-black text-3xl mx-10 text-center font-JakartaBold">
                 {title}
               </Text>
             </View>
