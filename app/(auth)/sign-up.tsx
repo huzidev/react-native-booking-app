@@ -7,12 +7,13 @@ import { View, Text, ScrollView, Image } from 'react-native'
 
 export default function SignUp() {
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    password: ''
-  })
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
 
-  const { name, email, password } = form;
+  const { name, email, password, confirmPassword } = form;
 
   function onSignUp() {
     console.log("SW singup button is pressed");
@@ -52,6 +53,18 @@ export default function SignUp() {
             textContentType="password"
             value={password}
             onChangeText={(value) => setForm({ ...form, password: value })}
+          />
+
+          <InputField
+            label="Confirm Password"
+            placeholder="Confirm password"
+            icon={icons.lock}
+            secureTextEntry={true}
+            textContentType="password"
+            value={confirmPassword}
+            onChangeText={(value) =>
+              setForm({ ...form, confirmPassword: value })
+            }
           />
 
           <CustomButton title="Sign Up" onPress={onSignUp} className="mt-6" />
