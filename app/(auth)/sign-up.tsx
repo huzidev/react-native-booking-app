@@ -1,6 +1,7 @@
 import CustomButton from '@/components/CustomButton';
 import InputField from '@/components/InputField';
 import { icons, images } from '@/constants';
+import { Link } from 'expo-router';
 import { useState } from 'react';
 import { View, Text, ScrollView, Image } from 'react-native'
 
@@ -53,11 +54,15 @@ export default function SignUp() {
             onChangeText={(value) => setForm({ ...form, password: value })}
           />
 
-          <CustomButton
-            title="Sign Up"
-            onPress={onSignUp}
-            className="mt-6"
-          />
+          <CustomButton title="Sign Up" onPress={onSignUp} className="mt-6" />
+
+          <Link
+            href="/sign-in"
+            className="text-lg text-center text-general-200 mt-10"
+          >
+            Already have an account?{" "}
+            <Text className="text-primary-500">Log In</Text>
+          </Link>
         </View>
       </View>
     </ScrollView>
