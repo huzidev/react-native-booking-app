@@ -25,7 +25,7 @@ export default function onBoarding() {
         loop={false}
         onIndexChanged={(i) => setActiveIndex(i)}
         dot={
-          <View className="w-[32px] h-[4px] mx-1 bg-[E2E8F0] rounded-full" />
+          <View className="w-[32px] h-[4px] mx-1 bg-[#E2E8F0] rounded-full" />
         }
         activeDot={
           <View className="w-[32px] h-[4px] mx-1 bg-[#0286FF] rounded-full" />
@@ -49,13 +49,13 @@ export default function onBoarding() {
           </View>
         ))}
       </Swiper>
-      <CustomButton 
+      <CustomButton
         title={isLastSlide ? "Get Started" : "Next"}
-        onPress={() => (
+        onPress={() =>
           isLastSlide
             ? router.replace("/(auth)/sign-up")
             : swiperRef.current?.scrollBy(1)
-        )}
+        }
         className="w-11/12 mt-10"
       />
     </SafeAreaView>
