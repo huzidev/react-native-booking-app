@@ -29,14 +29,21 @@ export default function onBoarding() {
           <View className="w-[32px] h-[4px] mx-1 bg-[#0286FF] rounded-full" />
         }
       >
-        {onboarding.map(({ id, title, image }) => (
+        {onboarding.map(({ id, title, image, description }) => (
           <View key={id} className="flex items-center justify-center p-5">
             <Image
               source={image}
               className="w-full h-[300px]"
               resizeMode="contain"
             />
-            <Text>{title}</Text>
+            <View className="flex flex-row items-center justify-center w-full mt-10">
+              <Text className="text-black text-3xl mx-10 text-center font-bold">
+                {title}
+              </Text>
+            </View>
+            <Text className="text-md font-JakartaSemiBold text-center text-[#858585] mx-10 mt-3">
+              {description}
+            </Text>
           </View>
         ))}
       </Swiper>
