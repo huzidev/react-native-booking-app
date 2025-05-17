@@ -1,3 +1,4 @@
+import CustomButton from '@/components/CustomButton';
 import InputField from '@/components/InputField';
 import { icons, images } from '@/constants';
 import { useState } from 'react';
@@ -11,6 +12,10 @@ export default function SignUp() {
   })
 
   const { name, email, password } = form;
+
+  function onSignUp() {
+    console.log("SW singup button is pressed");
+  }
 
   return (
     <ScrollView className="flex-1 bg-white">
@@ -35,7 +40,7 @@ export default function SignUp() {
             placeholder="Enter email"
             icon={icons.email}
             textContentType="emailAddress"
-            value={form.email}
+            value={email}
             onChangeText={(value) => setForm({ ...form, email: value })}
           />
           <InputField
@@ -44,8 +49,14 @@ export default function SignUp() {
             icon={icons.lock}
             secureTextEntry={true}
             textContentType="password"
-            value={form.password}
+            value={password}
             onChangeText={(value) => setForm({ ...form, password: value })}
+          />
+
+          <CustomButton
+            title="Sign Up"
+            onPress={onSignUp}
+            className="mt-6"
           />
         </View>
       </View>
