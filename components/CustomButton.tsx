@@ -31,7 +31,6 @@ const getBgVariantStyle = (variant: ButtonProps["bgVariant"]) => {
   }
 };
 
-
 export default function CustomButton({
   onPress,
   title,
@@ -49,7 +48,9 @@ export default function CustomButton({
     >
       {IconLeft && <IconLeft />}
 
-      <Text>{title}</Text>
+      <Text className={`text-lg font-bold ${getTextVariantStyle(textVariant)}`}>
+        {title}
+      </Text>
 
       {IconRight && <IconRight />}
     </TouchableOpacity>
