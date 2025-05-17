@@ -1,35 +1,27 @@
 import { ButtonProps } from "@/types/type";
 import { Text, TouchableOpacity } from "react-native";
 
-const getTextVariantStyle = (variant: ButtonProps["textVariant"]) => {
-  switch (variant) {
-    case "primary":
-      return "text-black";
-    case "secondary":
-      return "text-gray-100";
-    case "danger":
-      return "text-red-100";
-    case "success":
-      return "text-green-100";
-    default:
-      return "text-white";
-  }
+const textVariantStyles: Record<string, string> = {
+  primary: "text-black",
+  secondary: "text-gray-100",
+  danger: "text-red-100",
+  success: "text-green-100",
+  default: "text-white",
 };
 
-const getBgVariantStyle = (variant: ButtonProps["bgVariant"]) => {
-  switch (variant) {
-    case "secondary":
-      return "bg-gray-500";
-    case "danger":
-      return "bg-red-500";
-    case "success":
-      return "bg-green-500";
-    case "outline":
-      return "bg-transparent border-neutral-300 border-[0.5px]";
-    default:
-      return "bg-[#0286FF]";
-  }
+const bgVariantStyles: Record<string, string> = {
+  secondary: "bg-gray-500",
+  danger: "bg-red-500",
+  success: "bg-green-500",
+  outline: "bg-transparent border-neutral-300 border-[0.5px]",
+  primary: "bg-[#0286FF]",
 };
+
+const getTextVariantStyle = (variant: string = "default") =>
+  textVariantStyles[variant] || textVariantStyles.default;
+
+const getBgVariantStyle = (variant: string = "primary") =>
+  bgVariantStyles[variant] || bgVariantStyles.primary;
 
 export default function CustomButton({
   onPress,
