@@ -1,16 +1,20 @@
 import { Text, TouchableOpacity } from "react-native";
 
 export default function CustomButton({
-    onPress,
-    title,
+  onPress,
+  title,
+  bgVariant = "primary",
+  textVariant = "default",
+  IconLeft,
+  IconRight,
+  className,
+  ...props
 }) {
   return (
-    <TouchableOpacity
-        onPress={onPress}
-    >
-        <Text>
-            {title}
-        </Text>
+    <TouchableOpacity onPress={onPress}>
+      {IconLeft && <IconLeft />}
+      <Text>{title}</Text>
+      {IconRight && <IconRight />}
     </TouchableOpacity>
-  )
+  );
 }
