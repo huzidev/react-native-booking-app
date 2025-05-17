@@ -1,6 +1,6 @@
 import { router } from "expo-router";
 import { useRef, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View, Image } from "react-native";
 import Swiper from "react-native-swiper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { onboarding } from "@/constants";
@@ -29,9 +29,14 @@ export default function onBoarding() {
           <View className="w-[32px] h-[4px] mx-1 bg-[#0286FF] rounded-full" />
         }
       >
-        {onboarding.map((item) => (
-          <View>
-            <Text>{item.title}</Text>
+        {onboarding.map(({ id, title, image }) => (
+          <View key={id} className="flex items-center justify-center p-5">
+            <Image
+              source={image}
+              className="w-full h-[300px]"
+              resizeMode="contain"
+            />
+            <Text>{title}</Text>
           </View>
         ))}
       </Swiper>
