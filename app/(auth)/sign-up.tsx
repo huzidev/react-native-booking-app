@@ -1,9 +1,11 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 
 export default function SignUp() {
   return (
-    <View>
-      <Text className="p-2">This is signup page</Text>
-    </View>
+    <ScrollView className='flex-1 bg-black'>
+      <View className='flex-1 bg-white'>
+        update
+      </View>
+    </ScrollView>
   )
 }
