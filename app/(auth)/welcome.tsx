@@ -7,7 +7,7 @@ import { onboarding } from "@/constants";
 
 export default function onBoarding() {
   const swiperRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<number>(0);
   
   return (
     <SafeAreaView className="flex h-full items-center justify-center">
@@ -22,6 +22,12 @@ export default function onBoarding() {
         ref={swiperRef}
         loop={false}
         onIndexChanged={(i) => setActiveIndex(i)}
+        dot={
+          <View className="w-[32px] h-[4px] mx-1 bg-[E2E8F0] rounded-full" />
+        }
+        activeDot={
+          <View className="w-[32px] h-[4px] mx-1 bg-[#0286FF] rounded-full" />
+        }
       >
         {onboarding.map((item) => (
           <View>
