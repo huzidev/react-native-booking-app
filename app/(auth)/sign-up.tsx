@@ -123,7 +123,7 @@ export default function SignUp() {
         </View>
 
         <ReactNativeModal
-          isVisible={verification.state === VerificationState.SUCCESS}
+          isVisible={verification.state === VerificationState.PENDING}
         >
           <View className="bg-white p-5 rounded-lg">
             <Text>THis is test</Text>
