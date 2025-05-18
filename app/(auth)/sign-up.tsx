@@ -18,6 +18,7 @@ enum VerificationState {
 export default function SignUp() {
   const { isLoaded, signUp, setActive } = useSignUp();
   const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const [form, setForm] = useState({
@@ -38,8 +39,11 @@ export default function SignUp() {
   async function onSignUp() {
     if (!isLoaded) return;
 
+    setLoading(true);
+
     if (password !== confirmPassword) {
-      Alert.alert("Error", "Passwords do not match");
+      Alert.alert("Error", "Password does not match");
+      setLoading(false);
       return;
     }
 
@@ -50,6 +54,8 @@ export default function SignUp() {
       });
 
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
+
+      setLoading(false);
 
       setVerification({
         ...verification,
@@ -141,7 +147,7 @@ export default function SignUp() {
             }
           />
 
-          <CustomButton title="Sign Up" onPress={onSignUp} className="mt-6" />
+          <CustomButton title="Sign Up" onPress={onSignUp} loading={loading} className="mt-6" />
 
           <OAuth />
 
@@ -155,7 +161,7 @@ export default function SignUp() {
         </View>
 
         <ReactNativeModal
-          isVisible={verification.state === VerificationState.DEFAULT}
+          isVisible={verification.state === VerificationState.PENDING}
           onModalHide={() => {
             if (verification.state === VerificationState.SUCCESS) {
               setShowSuccessModal(true);

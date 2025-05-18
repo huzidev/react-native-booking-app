@@ -1,5 +1,5 @@
 import { ButtonProps } from "@/types/type";
-import { Text, TouchableOpacity } from "react-native";
+import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
 
 const textVariantStyles: Record<string, string> = {
   primary: "text-black",
@@ -28,6 +28,7 @@ export default function CustomButton({
   title,
   bgVariant = "primary", // by-default
   textVariant = "default", // by-default
+  isLoading,
   IconLeft,
   IconRight,
   className,
@@ -38,13 +39,21 @@ export default function CustomButton({
       onPress={onPress}
       className={`w-full rounded-full p-3 flex flex-row justify-center items-center shadow-md shadow-neutral-400/70 ${getBgVariantStyle(bgVariant)} ${className}`}
     >
-      {IconLeft && <IconLeft />}
+      {isLoading ? (
+        <ActivityIndicator size="small" color="#fff" />
+      ) : (
+        <>
+          {IconLeft && <IconLeft />}
 
-      <Text className={`text-lg font-bold ${getTextVariantStyle(textVariant)}`}>
-        {title}
-      </Text>
+          <Text
+            className={`text-lg font-bold ${getTextVariantStyle(textVariant)}`}
+          >
+            {title}
+          </Text>
 
-      {IconRight && <IconRight />}
+          {IconRight && <IconRight />}
+        </>
+      )}
     </TouchableOpacity>
   );
 }
