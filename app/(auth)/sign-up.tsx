@@ -23,14 +23,20 @@ export default function SignUp() {
 
   const [verification, setVerification] = useState({
     state: VerificationState.DEFAULT,
-    code: "",
+    error: "",
     email: ""
   });
 
   const { name, email, password, confirmPassword } = form;
 
   function onSignUp() {
-    console.log("SW singup button is pressed");
+    if (password !== confirmPassword) {
+      setVerification({
+        ...verification,
+        state: VerificationState.FAILED,
+        error: "Password does not match",
+      });
+    }
   }
 
   return (
