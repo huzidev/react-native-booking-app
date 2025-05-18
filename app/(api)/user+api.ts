@@ -25,6 +25,10 @@ export async function POST(request: Request) {
             ${clerkId}
         )
     `;
+
+    return new Response(JSON.stringify({ data: response }), {
+      status: 200,
+    });
   } catch (err) {
     console.error("Error creating user:", err);
     return Response.json({ error: "Internal Server Error" }, { status: 500 });
