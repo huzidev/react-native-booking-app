@@ -62,7 +62,35 @@ export default function SignUp() {
   }
 
   async function onVerify() {
-    
+    if (!isLoaded) return;
+
+    try {
+      const completeSignUp = await signUp.attemptEmailAddressVerification({
+        code: verification.code,
+      });
+
+      if (completeSignUp.status === "complete") {
+        await setActive({ session: completeSignUp.createdSessionId });
+
+        setVerification({
+          ...verification,
+          state: VerificationState.SUCCESS,
+        });
+      } else {
+        setVerification({
+          ...verification,
+          error: "Verification failed. Please try again.",
+          state: VerificationState.FAILED,
+        });
+      }
+
+    } catch (err: any) {
+    setVerification({
+      ...verification,
+      error: err.errors[0].longMessage,
+      state: VerificationState.FAILED,
+    })
+    }
   }
 
   return (
