@@ -2,7 +2,8 @@ import CustomButton from '@/components/CustomButton';
 import InputField from '@/components/InputField';
 import OAuth from '@/components/OAuth';
 import { icons, images } from '@/constants';
-import { Link } from 'expo-router';
+import { useSignUp } from '@clerk/clerk-expo';
+import { Link, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { View, Text, ScrollView, Image } from 'react-native'
 
@@ -14,6 +15,9 @@ enum VerificationState {
 }
 
 export default function SignUp() {
+  const { isLoaded, signUp, setActive } = useSignUp();
+  const router = useRouter();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -30,6 +34,8 @@ export default function SignUp() {
   const { name, email, password, confirmPassword } = form;
 
   function onSignUp() {
+    if (!isLoaded) return;
+
     if (password !== confirmPassword) {
       setVerification({
         ...verification,
