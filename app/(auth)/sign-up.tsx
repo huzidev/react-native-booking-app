@@ -1,11 +1,11 @@
-import CustomButton from '@/components/CustomButton';
-import InputField from '@/components/InputField';
-import OAuth from '@/components/OAuth';
-import { icons, images } from '@/constants';
-import { useSignUp } from '@clerk/clerk-expo';
-import { Link, useRouter } from 'expo-router';
-import { useState } from 'react';
-import { View, Text, ScrollView, Image } from 'react-native'
+import CustomButton from "@/components/CustomButton";
+import InputField from "@/components/InputField";
+import OAuth from "@/components/OAuth";
+import { icons, images } from "@/constants";
+import { useSignUp } from "@clerk/clerk-expo";
+import { Link, useRouter } from "expo-router";
+import { useState } from "react";
+import { View, Text, ScrollView, Image, Alert } from "react-native";
 
 enum VerificationState {
   DEFAULT = "default",
@@ -22,18 +22,18 @@ export default function SignUp() {
     name: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
 
   const [verification, setVerification] = useState({
     state: VerificationState.DEFAULT,
     error: "",
-    email: ""
+    email: "",
   });
 
   const { name, email, password, confirmPassword } = form;
 
-  function onSignUp() {
+  async function onSignUp() {
     if (!isLoaded) return;
 
     if (password !== confirmPassword) {
@@ -42,6 +42,21 @@ export default function SignUp() {
         state: VerificationState.FAILED,
         error: "Password does not match",
       });
+    }
+
+    try {
+      await signUp.create({
+        emailAddress: email,
+        password: password,
+      });
+      await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
+      setVerification({
+        ...verification,
+        state: VerificationState.PENDING,
+      });
+    } catch (err: any) {
+      console.log(JSON.stringify(err, null, 2));
+      Alert.alert("Error", err.errors[0].longMessage);
     }
   }
 
