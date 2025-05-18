@@ -48,3 +48,23 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+
+# Server API calls
+
+## app.json
+```
+   "web": {
+      "bundler": "metro",
+      "output": "static", <- Change this to 'server'
+      "favicon": "./assets/images/favicon.png"
+    },
+```
+
+```
+   "web": {
+      "bundler": "metro",
+      "output": "server",
+      "favicon": "./assets/images/favicon.png"
+    },
+```
