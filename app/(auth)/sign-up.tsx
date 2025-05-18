@@ -17,6 +17,7 @@ enum VerificationState {
 
 export default function SignUp() {
   const { isLoaded, signUp, setActive } = useSignUp();
+  const [showSuccessModal, setShowSuccessModal] = useState<boolean>(false);
   const router = useRouter();
 
   const [form, setForm] = useState({
@@ -47,7 +48,9 @@ export default function SignUp() {
         emailAddress: email,
         password: password,
       });
+
       await signUp.prepareEmailAddressVerification({ strategy: "email_code" });
+
       setVerification({
         ...verification,
         state: VerificationState.PENDING,
@@ -120,10 +123,20 @@ export default function SignUp() {
         </View>
 
         <ReactNativeModal
-          isVisible={verification.state === VerificationState.PENDING}
+          isVisible={verification.state === VerificationState.DEFAULT}
+          onModalHide={() => {
+            if (verification.state === VerificationState.SUCCESS) {
+              setShowSuccessModal(true);
+            }
+          }}
         >
-          <View className="bg-white p-5 rounded-lg">
-            <Text>THis is test</Text>
+          <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
+            <Text className="font-JakartaExtraBold text-2xl mb-2">
+              Verification
+            </Text>
+            <Text className="font-Jakarta mb-5">
+              We've sent a verification code to {form.email}.
+            </Text>
           </View>
         </ReactNativeModal>
       </View>
