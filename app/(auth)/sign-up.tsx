@@ -7,6 +7,7 @@ import { Link, useRouter } from "expo-router";
 import { ReactNativeModal } from "react-native-modal";
 import { useState } from "react";
 import { View, Text, ScrollView, Image, Alert } from "react-native";
+import fetchAPI from "@/lib/fetch";
 
 enum VerificationState {
   DEFAULT = "default",
@@ -76,6 +77,15 @@ export default function SignUp() {
       });
 
       if (completeSignUp.status === "complete") {
+        await fetchAPI("/(api)/user", {
+          method: "POST",
+          body: JSON.stringify({
+            name,
+            email,
+            clerkId: completeSignUp.createdUserId,
+          }),
+        });
+
         await setActive({ session: completeSignUp.createdSessionId });
 
         setVerification({
@@ -89,13 +99,12 @@ export default function SignUp() {
           state: VerificationState.FAILED,
         });
       }
-
     } catch (err: any) {
-    setVerification({
-      ...verification,
-      error: err.errors[0].longMessage,
-      state: VerificationState.FAILED,
-    })
+      setVerification({
+        ...verification,
+        error: err.errors[0].longMessage,
+        state: VerificationState.FAILED,
+      });
     }
   }
 
@@ -147,7 +156,12 @@ export default function SignUp() {
             }
           />
 
-          <CustomButton title="Sign Up" onPress={onSignUp} isLoading={loading} className="mt-6" />
+          <CustomButton
+            title="Sign Up"
+            onPress={onSignUp}
+            isLoading={loading}
+            className="mt-6"
+          />
 
           <OAuth />
 
