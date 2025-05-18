@@ -2,6 +2,7 @@ import { useFonts } from 'expo-font';
 import "./global.css";
 import { Stack } from 'expo-router';
 import { ClerkProvider } from "@clerk/clerk-expo";
+import { tokenCache } from "@clerk/clerk-expo/token-cache";
 
 const routes = ['index', '(root)', '(auth)'] as const;
 
@@ -22,7 +23,7 @@ export default function RootLayout() {
   }
 
   return (
-    <ClerkProvider>
+    <ClerkProvider tokenCache={tokenCache}>
       <Stack>
         {routes.map((route, index) => (
           <Stack.Screen
