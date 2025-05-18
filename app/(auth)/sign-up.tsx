@@ -4,6 +4,7 @@ import OAuth from "@/components/OAuth";
 import { icons, images } from "@/constants";
 import { useSignUp } from "@clerk/clerk-expo";
 import { Link, useRouter } from "expo-router";
+import { ReactNativeModal } from "react-native-modal";
 import { useState } from "react";
 import { View, Text, ScrollView, Image, Alert } from "react-native";
 
@@ -120,6 +121,14 @@ export default function SignUp() {
             <Text className="text-primary-500">Log In</Text>
           </Link>
         </View>
+
+        <ReactNativeModal
+          isVisible={verification.state === VerificationState.SUCCESS}
+        >
+          <View className="bg-white p-5 rounded-lg">
+            <Text>THis is test</Text>
+          </View>
+        </ReactNativeModal>
       </View>
     </ScrollView>
   );
