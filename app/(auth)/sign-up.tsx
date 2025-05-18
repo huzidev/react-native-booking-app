@@ -61,6 +61,10 @@ export default function SignUp() {
     }
   }
 
+  async function onVerify() {
+    
+  }
+
   return (
     <ScrollView className="flex-1 bg-white">
       <View className="flex-1 bg-white">
@@ -147,6 +151,37 @@ export default function SignUp() {
               onChangeText={(value) =>
                 setVerification({ ...verification, code: value })
               }
+            />
+
+            {verification.error && (
+              <Text className="text-red-500 text-sm mt-1">
+                {verification.error}
+              </Text>
+            )}
+
+            <CustomButton
+              title="Verify Email"
+              onPress={onVerify}
+              className="mt-5 bg-success-500"
+            />
+          </View>
+        </ReactNativeModal>
+        <ReactNativeModal isVisible={showSuccessModal}>
+          <View className="bg-white px-7 py-9 rounded-2xl min-h-[300px]">
+            <Image
+              source={images.check}
+              className="w-[110px] h-[110px] mx-auto my-5"
+            />
+            <Text className="text-3xl font-JakartaBold text-center">
+              Verified
+            </Text>
+            <Text className="text-base text-gray-400 font-Jakarta text-center mt-2">
+              You have successfully verified your account.
+            </Text>
+            <CustomButton
+              title="Browse Home"
+              onPress={() => router.push(`/(root)/(tabs)/home`)}
+              className="mt-5"
             />
           </View>
         </ReactNativeModal>
