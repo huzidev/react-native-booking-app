@@ -147,7 +147,7 @@ export default function SignUp() {
             }
           />
 
-          <CustomButton title="Sign Up" onPress={onSignUp} loading={loading} className="mt-6" />
+          <CustomButton title="Sign Up" onPress={onSignUp} isLoading={loading} className="mt-6" />
 
           <OAuth />
 
