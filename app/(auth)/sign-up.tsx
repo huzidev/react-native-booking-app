@@ -138,12 +138,15 @@ export default function SignUp() {
               We've sent a verification code to {email}.
             </Text>
 
-            <InputField 
+            <InputField
               label="Code"
               icon={icons.lock}
               placeholder="12345"
               value={verification.code}
-
+              keyboardType="numeric"
+              onChangeText={(value) =>
+                setVerification({ ...verification, code: value })
+              }
             />
           </View>
         </ReactNativeModal>
