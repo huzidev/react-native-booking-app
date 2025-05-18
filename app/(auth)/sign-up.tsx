@@ -38,11 +38,8 @@ export default function SignUp() {
     if (!isLoaded) return;
 
     if (password !== confirmPassword) {
-      setVerification({
-        ...verification,
-        state: VerificationState.FAILED,
-        error: "Password does not match",
-      });
+      Alert.alert("Error", "Passwords do not match");
+      return;
     }
 
     try {
