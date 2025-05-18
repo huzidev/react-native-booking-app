@@ -95,6 +95,30 @@ export const onboarding = [
   },
 ];
 
+
+export const tabs = [
+  {
+    name: "home",
+    title: "Home",
+    icon: icons.home,
+  },
+  {
+    name: "rides",
+    title: "Rides",
+    icon: icons.list,
+  },
+  {
+    name: "chat",
+    title: "Chat",
+    icon: icons.chat,
+  },
+  {
+    name: "profile",
+    title: "Profile",
+    icon: icons.profile,
+  },
+];
+
 export const data = {
   onboarding,
 };
