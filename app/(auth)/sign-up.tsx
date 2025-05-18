@@ -30,7 +30,7 @@ export default function SignUp() {
   const [verification, setVerification] = useState({
     state: VerificationState.DEFAULT,
     error: "",
-    email: "",
+    code: "",
   });
 
   const { name, email, password, confirmPassword } = form;
@@ -135,8 +135,16 @@ export default function SignUp() {
               Verification
             </Text>
             <Text className="font-Jakarta mb-5">
-              We've sent a verification code to {form.email}.
+              We've sent a verification code to {email}.
             </Text>
+
+            <InputField 
+              label="Code"
+              icon={icons.lock}
+              placeholder="12345"
+              value={verification.code}
+
+            />
           </View>
         </ReactNativeModal>
       </View>
