@@ -1,4 +1,5 @@
 import { InputFieldProps } from "@/types/type";
+import { useState } from "react";
 import {
   View,
   Text,
@@ -8,6 +9,7 @@ import {
   Platform,
   TextInput,
   Keyboard,
+  TouchableOpacity,
 } from "react-native";
 
 export default function InputField({
@@ -21,6 +23,8 @@ export default function InputField({
   className,
   ...props
 }: InputFieldProps) {
+  const [isSecure, setIsSecure] = useState<boolean>(secureTextEntry);
+
   return (
     // KeyboardAvoidingView Adjust the UI of page when keyboard is open
     <KeyboardAvoidingView
@@ -39,9 +43,26 @@ export default function InputField({
             )}
             <TextInput
               className={`rounded-full p-4 font-JakartaSemiBold text-[15px] flex-1 ${inputStyle} text-left`}
-              secureTextEntry={secureTextEntry}
+              secureTextEntry={isSecure}
               {...props}
             />
+
+            {secureTextEntry && (
+              <TouchableOpacity
+                onPress={() => setIsSecure(!isSecure)}
+                className="px-4"
+              >
+                {isSecure ? (
+                  <Text>
+                    Show
+                  </Text>
+                ) : (
+                  <Text>
+                    Hide
+                  </Text>
+                )}
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </TouchableWithoutFeedback>
