@@ -6,12 +6,25 @@ import { Link } from 'expo-router';
 import { useState } from 'react';
 import { View, Text, ScrollView, Image } from 'react-native'
 
+enum VerificationState {
+  DEFAULT = "default",
+  PENDING = "pending",
+  SUCCESS = "success",
+  FAILED = "failed",
+}
+
 export default function SignUp() {
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: ""
+  });
+
+  const [verification, setVerification] = useState({
+    state: VerificationState.DEFAULT,
+    code: "",
+    email: ""
   });
 
   const { name, email, password, confirmPassword } = form;
