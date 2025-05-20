@@ -3,7 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function Home() {
   return (
-    <SafeAreaView>
+    <SafeAreaView className="bg-general-500">
       <Text>This is Home page</Text>
     </SafeAreaView>
   );

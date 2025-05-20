@@ -1,8 +1,9 @@
 import { useFonts } from 'expo-font';
 import "./global.css";
-import { Stack } from 'expo-router';
+import { SplashScreen, Stack } from 'expo-router';
 import { ClerkProvider } from "@clerk/clerk-expo";
 import { tokenCache } from "@clerk/clerk-expo/token-cache";
+import { useEffect } from 'react';
 
 const routes = ['index', '(root)', '(auth)'] as const;
 
@@ -17,21 +18,30 @@ export default function RootLayout() {
     "Jakarta-SemiBold": require("../assets/fonts/PlusJakartaSans-SemiBold.ttf"),
   });
 
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
+
   if (!loaded) {
-    // Async font loading only occurs in development.
     return null;
   }
+
 
   return (
     <ClerkProvider tokenCache={tokenCache}>
       <Stack>
-        {routes.map((route, index) => (
+        {/* {routes.map((route, index) => (
           <Stack.Screen
             key={index}
             name={route}
             options={{ headerShown: false }}
           />
-        ))}
+        ))} */}
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+        <Stack.Screen name="(root)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
       </Stack>
     </ClerkProvider>

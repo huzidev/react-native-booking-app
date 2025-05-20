@@ -1,22 +1,44 @@
-import CustomButton from '@/components/CustomButton';
-import InputField from '@/components/InputField';
-import OAuth from '@/components/OAuth';
-import { icons, images } from '@/constants';
-import { Link } from 'expo-router';
-import { useState } from 'react';
-import { View, Text, ScrollView, Image } from "react-native";
+import { useSignIn } from "@clerk/clerk-expo";
+import { Link, router } from "expo-router";
+import { useCallback, useState } from "react";
+import { Alert, Image, ScrollView, Text, View } from "react-native";
 
-export default function SignIn() {
+import CustomButton from "@/components/CustomButton";
+import InputField from "@/components/InputField";
+import OAuth from "@/components/OAuth";
+import { icons, images } from "@/constants";
+
+const SignIn = () => {
+  const { signIn, setActive, isLoaded } = useSignIn();
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
-  function onSignIn() {
-    console.log("SW signin");
+  const { email, password } = form;
+
+  async function onSignin() {
+    if (!isLoaded) return;
+
+    try {
+      const signInAttempt = await signIn.create({
+        identifier: email,
+        password,
+      });
+
+      if (signInAttempt.status === "complete") {
+        await setActive({ session: signInAttempt.createdSessionId });
+        router.replace("/(root)/(tabs)/home");
+      } else {
+        console.log(JSON.stringify(signInAttempt, null, 2));
+        Alert.alert("Error", "Log in failed. Please try again.");
+      }
+    } catch (err: any) {
+      console.log(JSON.stringify(err, null, 2));
+      Alert.alert("Error", err.errors[0].longMessage);
+    }
   }
 
-  const { email, password } = form;
   return (
     <ScrollView className="flex-1 bg-white">
       <View className="flex-1 bg-white">
@@ -47,10 +69,15 @@ export default function SignIn() {
             onChangeText={(value) => setForm({ ...form, password: value })}
           />
 
-          <CustomButton title="Sign In" onPress={onSignIn} className="mt-6" />
+          <CustomButton title="Sign In" onPress={onSignin} className="mt-6" />
 
           <OAuth />
 
+          <CustomButton
+            title="Browse Home"
+            onPress={() => router.push(`/(root)/(tabs)/home`)}
+            className="mt-5"
+          />
           <Link
             href="/sign-up"
             className="text-lg text-center text-general-200 mt-10"
@@ -62,4 +89,6 @@ export default function SignIn() {
       </View>
     </ScrollView>
   );
-}
+};
+
+export default SignIn;
